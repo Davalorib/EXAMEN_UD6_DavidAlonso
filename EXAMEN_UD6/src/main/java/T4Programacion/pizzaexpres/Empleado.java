@@ -1,8 +1,9 @@
 package T4Programacion.pizzaexpres;
 
 import lombok.Getter;
+import lombok.ToString;
 
-@Getter
+@Getter @ToString
 public class Empleado extends PizzaExpress implements AccionesPedido{
 
     public static int cantidadID = 0; //un contador de cantidad de IDs que es publico para poder acceder a él si es necesario
@@ -31,14 +32,14 @@ public class Empleado extends PizzaExpress implements AccionesPedido{
     public void siguienteEstado(Pedido pedido){
         Estado actual = pedido.getEstadoPedido();
         actual = actual.siguiente(actual);
-        System.out.println(actual);
+        pedido.setEstadoPedido(actual);
     }
 
     public void entregarPedido(Pedido pedido){
         if (pedido.getEstadoPedido() != Estado.LISTO){
             throw new NoListoExcepcion();
         } else {
-            System.out.print("Entregando el pedido ");
+            System.out.print("Entregando el ");
             pedido.obtenerDetalles();
         }
     }
@@ -48,7 +49,7 @@ public class Empleado extends PizzaExpress implements AccionesPedido{
     }
 
     public void obtenerDetalles() {
-        System.out.println("Empleado: ["+nombre+", con id: "+id_empleado+"]");
+        System.out.println("Empleado "+id_empleado+": "+nombre);
     }
 
 }

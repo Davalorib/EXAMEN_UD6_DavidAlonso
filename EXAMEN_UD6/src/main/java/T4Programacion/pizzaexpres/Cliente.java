@@ -4,12 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Scanner;
-
 @Getter @Setter @ToString
 public class Cliente extends PizzaExpress implements AccionesPedido{
-
-    Scanner ent = new Scanner(System.in);
 
     private static final int DESCUENTO_DEF = 20;
 
@@ -23,14 +19,16 @@ public class Cliente extends PizzaExpress implements AccionesPedido{
     }
 
     public void pedir(){
-        System.out.println("Qué le apetece hoy al cliente?");
+        System.out.println("¿Qué te apetece hoy, "+nombre+"?");
+        System.out.println("=========CARTA==========");
         for (CartaPizzas pizzas:CartaPizzas.values()){
-            System.out.print(pizzas.name()+", ");
+            System.out.println(pizzas.name()+": "+pizzas.getPrecio()+"€");
         }
+        System.out.println("========================");
     }
 
     public void preciofinal(Double precio){
-        System.out.println("Total a pagar: "+precio*(100-getDescuento())/100+"€");
+        System.out.println("Descuento a aplicar: "+descuento+"%. Total importe a pagar: "+precio*(100-getDescuento())/100+"€");
     }
 
     public void pagar(){
@@ -38,7 +36,7 @@ public class Cliente extends PizzaExpress implements AccionesPedido{
     }
 
     public void recoger(){
-        System.out.println(nombre+" está recogiendo el pedido...");
+        System.out.println("Pedido recogido por "+nombre);
     }
 
     public void cancelar(Pedido pedido) {
